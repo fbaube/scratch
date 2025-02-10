@@ -11,3 +11,11 @@ func wasmexport_Call() (result *string) {
 	result = &result_
 	return
 }
+
+//go:wasmexport example:invoker/invoker#func2
+//export example:invoker/invoker#func2
+func wasmexport_Func2() (result *string) {
+	result_ := Exports.Func2()
+	result = &result_
+	return
+}
