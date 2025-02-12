@@ -2,6 +2,10 @@
 
 package invoker
 
+import (
+	"go.bytecodealliance.org/cm"
+)
+
 // This file contains wasmimport and wasmexport declarations for "example:invoker".
 
 //go:wasmexport example:invoker/invoker#call
@@ -12,10 +16,33 @@ func wasmexport_Call() (result *string) {
 	return
 }
 
-//go:wasmexport example:invoker/invoker#func2
-//export example:invoker/invoker#func2
-func wasmexport_Func2() (result *string) {
-	result_ := Exports.Func2()
+//go:wasmexport example:invoker/invoker#exec
+//export example:invoker/invoker#exec
+func wasmexport_Exec(command0 *uint8, command1 uint32) (result *string) {
+	command := cm.LiftString[string]((*uint8)(command0), (uint32)(command1))
+	result_ := Exports.Exec(command)
+	result = &result_
+	return
+}
+
+//go:wasmexport example:invoker/invoker#query1
+//export example:invoker/invoker#query1
+func wasmexport_Query1(name0 *uint8, name1 uint32, value0 *uint8, value1 uint32) (result *string) {
+	name := cm.LiftString[string]((*uint8)(name0), (uint32)(name1))
+	value := cm.LiftString[string]((*uint8)(value0), (uint32)(value1))
+	result_ := Exports.Query1(name, value)
+	result = &result_
+	return
+}
+
+//go:wasmexport example:invoker/invoker#query
+//export example:invoker/invoker#query
+func wasmexport_Query(tbl0 *uint8, tbl1 uint32, fld0 *uint8, fld1 uint32, cond0 *uint8, cond1 uint32, val0 *uint8, val1 uint32) (result *string) {
+	tbl := cm.LiftString[string]((*uint8)(tbl0), (uint32)(tbl1))
+	fld := cm.LiftString[string]((*uint8)(fld0), (uint32)(fld1))
+	cond := cm.LiftString[string]((*uint8)(cond0), (uint32)(cond1))
+	val := cm.LiftString[string]((*uint8)(val0), (uint32)(val1))
+	result_ := Exports.Query(tbl, fld, cond, val)
 	result = &result_
 	return
 }

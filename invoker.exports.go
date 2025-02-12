@@ -9,8 +9,26 @@ var Exports struct {
 	//	call: func() -> string
 	Call func() (result string)
 
-	// Func2 represents the caller-defined, exported function "func2".
+	// Exec represents the caller-defined, exported function "exec".
 	//
-	//	func2: func() -> string
-	Func2 func() (result string)
+	//	exec: func(command: string) -> string
+	Exec func(command string) (result string)
+
+	// Query1 represents the caller-defined, exported function "query1".
+	//
+	// Check for equality on ID or other unique column.
+	// name(string) can be either
+	// - tableName (and assume the ID column) or
+	// - tableName.colName (the column must be "UNIQUE")
+	//
+	//	query1: func(name: string, value: string) -> string
+	Query1 func(name string, value string) (result string)
+
+	// Query represents the caller-defined, exported function "query".
+	//
+	// (str,val)->(row,error)
+	// Check for simple condition on column (need not be "UNIQUE").
+	//
+	//	query: func(tbl: string, fld: string, cond: string, val: string) -> string
+	Query func(tbl string, fld string, cond string, val string) (result string)
 }
