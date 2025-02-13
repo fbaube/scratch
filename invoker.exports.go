@@ -9,9 +9,9 @@ var Exports struct {
 	//	call: func() -> string
 	Call func() (result string)
 
-	// Call represents the caller-defined, exported function "call".
+	// Func2 represents the caller-defined, exported function "func2".
 	//
-	//	call: func() -> string
+	//	func2: func() -> string
 	Func2 func() (result string)
 
 	// Exec represents the caller-defined, exported function "exec".
